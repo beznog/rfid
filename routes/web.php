@@ -13,24 +13,24 @@
 
 
 // Main page
-Route::get('', 'ItemsController@index');
+Route::get('', 'ItemController@index');
 
 // Show all items
-Route::get('list', 'ItemsController@list');
+Route::get('list', 'ItemController@list');
 
 // Add new item (system, component or element)
 Route::post('add_item',
     [
         'before' => 'csrf',
-        'uses' => 'ItemsController@store'
+        'uses' => 'ItemController@store'
     ]
 );
 
 // Edit item
-Route::post('edit/{itemId}', 'ItemsController@edit');
+Route::post('edit/{itemId}', 'ItemController@edit');
 
 // Delete item
-Route::get('delete/{itemId}', 'ItemsController@delete');
+Route::get('delete/{itemId}', 'ItemController@delete');
 
 // Scan items
-Route::get('scan/{itemId}', 'ItemsController@scan');
+Route::get('scan/{itemId}', 'ItemController@scan');

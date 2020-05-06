@@ -11,6 +11,26 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+// Main page
+Route::get('', 'ItemsController@index');
+
+// Show all items
+Route::get('list', 'ItemsController@list');
+
+// Add new item (system, component or element)
+Route::post('add_item',
+    [
+        'before' => 'csrf',
+        'uses' => 'ItemsController@store'
+    ]
+);
+
+// Edit item
+Route::post('edit/{itemId}', 'ItemsController@edit');
+
+// Delete item
+Route::get('delete/{itemId}', 'ItemsController@delete');
+
+// Scan items
+Route::get('scan/{itemId}', 'ItemsController@scan');

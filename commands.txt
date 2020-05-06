@@ -1,0 +1,4 @@
+php artisan make:model --migration --controller Item
+
+php artisan migrate:fresh
+php artisan migrate

@@ -13,3 +13,8 @@ composer require symfony/psr-http-message-bridge
 php artisan make:request UserStoreRequest
 
 php artisan storage:link
+
+composer dump-autoload
+composer install
+
+composer update

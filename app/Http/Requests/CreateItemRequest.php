@@ -46,7 +46,7 @@ class CreateItemRequest extends FormRequest
             ],
             'images' => [
                 'nullable',
-                'mimes:jpg,png'
+                'image'
             ],
             'tag_id' => [
                 'nullable',

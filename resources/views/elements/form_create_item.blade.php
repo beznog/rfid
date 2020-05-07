@@ -15,6 +15,7 @@
                 'url' => (empty($item)) ? '/add' : '/edit/'.$item['id'], 
                 'id' => (empty($item)) ? 'add' : 'edit', 
                 'files' => true,
+                'enctype' => 'multipart/form-data',
                 'class' => 'grid-x grid-padding-x', 
                 'autocomplete' => 'off', 
                 'name' => (empty($item)) ? 'add' : 'edit'

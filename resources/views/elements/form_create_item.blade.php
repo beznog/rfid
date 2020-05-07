@@ -13,17 +13,18 @@
 
 {{ Form::open([
                 'url' => (empty($item)) ? '/add' : '/edit/'.$item['id'], 
-                'id' => (empty($item)) ? 'add_item' : 'edit_item', 
-                'class' => 'grid-x', 
+                'id' => (empty($item)) ? 'add' : 'edit', 
+                'files' => true,
+                'class' => 'grid-x grid-padding-x', 
                 'autocomplete' => 'off', 
-                'name' => (empty($item)) ? 'add_item' : 'edit_item'
+                'name' => (empty($item)) ? 'add' : 'edit'
             ]) 
 }}
 
 
 @isset($item['id'])
     {{ Form::hidden(
-            'item_id', 
+            'id', 
             $value = $item['id'], 
             $attributes = array(
                 'id'=>'item_id_hidden'
@@ -45,14 +46,14 @@
 
 <div class="cell small-12 parameter" data-parameter-name="preposition">
     {{ Form::select(
-            'preposition', 
+            'item_type_id', 
             [
-                'system' => 'System', 
-                'component' => 'Component',
-                'element' => 'Element',
+                '1' => 'System', 
+                '2' => 'Component',
+                '3' => 'Element',
             ], 
-            (!empty($item['itemType'])) ? $word['itemType'] : null,
-            (!empty($item['itemType'])) ? [] : ['placeholder' => 'Type']
+            (!empty($item['itemTypeId'])) ? $item['itemTypeId'] : null,
+            (!empty($item['itemTypeId'])) ? [] : ['placeholder' => 'Type']
     )}}
 </div>
 
@@ -68,7 +69,9 @@
 
 
 <div class="cell small-12 parameter default" data-parameter-name="images">
-    IMAGES TO DO
+    {{ Form::file(
+            'images'
+    )}}
 </div>
 
 <div class="cell small-12 parameter default" data-parameter-name="tag_id">
@@ -82,7 +85,7 @@
 </div>
 
 
-<div class="cell small-12">
+<div class="cell small-12 parameter default">
     {{ Form::submit('Submit', ['class'=>'button cell small-12']) }}
 </div>
 

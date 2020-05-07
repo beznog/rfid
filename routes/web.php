@@ -19,12 +19,16 @@ Route::get('', 'ItemController@index');
 Route::get('list', 'ItemController@list');
 
 // Add new item (system, component or element)
-Route::post('add_item',
+Route::get('add', 'ItemController@index');
+Route::post('add',
     [
         'before' => 'csrf',
         'uses' => 'ItemController@store'
     ]
 );
+
+// Autofill form to edit item
+Route::get('edit/{itemId}', 'ItemController@autocompleteEditForm');
 
 // Edit item
 Route::post('edit/{itemId}', 'ItemController@edit');

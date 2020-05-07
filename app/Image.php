@@ -10,7 +10,9 @@ class Image extends Model
     protected $fillable = ['url', 'thumbnail_url'];
 
     public static function add($params) {
-        return self::firstOrCreate(array('url' => $params->url, 'thumbnail_url' => $params->thumbnail_url));
+    	$file = $params->storeAs('covers', $params->getClientOriginalName());
+
+        return self::firstOrCreate(array('url' => $file, 'thumbnail_url' => $file));
     }
 
      public function items() {

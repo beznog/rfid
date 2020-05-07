@@ -25,14 +25,14 @@ class CreateItemRequest extends FormRequest
     public function rules()
     {
         return [
-            'item_id' => [
+            'id' => [
                 'nullable',
                 'regex:/^([0-9]*)$/',
                 'max:20'
             ],
-            'type_id' => [
+            'item_type_id' => [
                 'required',
-                Rule::in(['system','component','element'])
+                Rule::in(['1','2','3'])
             ],
             'name' => [
                 'required',
@@ -46,11 +46,10 @@ class CreateItemRequest extends FormRequest
             ],
             'images' => [
                 'nullable',
-                'json',
-                'max:400'
+                'mimes:jpg,png'
             ],
             'tag_id' => [
-                'required',
+                'nullable',
                 'string',
                 'max:20'
             ]

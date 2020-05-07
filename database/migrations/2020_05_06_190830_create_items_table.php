@@ -17,8 +17,8 @@ class CreateItemsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->bigInteger('item_type_id')->unsigned()->index()->default(NULL);
-            $table->mediumText('description');
-            $table->string('tag_id');
+            $table->mediumText('description')->nullable();
+            $table->string('tag_id')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
 

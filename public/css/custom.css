@@ -156,3 +156,17 @@
 }
 
 /* End Orbite Slider */
+
+
+
+[type="text"], [type="password"], [type="date"], [type="datetime"], [type="datetime-local"], [type="month"], [type="week"], [type="email"], [type="number"], [type="search"], [type="tel"], [type="time"], [type="url"], [type="color"], textarea, [type="file"], [type="checkbox"], [type="radio"] {
+  margin: 0;
+}
+
+.parameter {
+  margin: 1.5em 0 0 0;
+}
+
+li {
+  list-style-type: none;
+}

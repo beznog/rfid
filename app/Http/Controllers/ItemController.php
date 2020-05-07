@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Arr;
 
 use App\Item;
 use App\ItemType;
@@ -33,16 +34,14 @@ class ItemController extends Controller
     }
 
     public function edit(CreateItemRequest $request) {
-        // TODO
         $validatedData = $request->validated();
-
-        $item = Item::where('id', $params['item_id'])->get()->first();
+        $item = Item::where('id', $validatedData['id'])->get()->first();
         $item->update($validatedData);
 
-        $itemType = ItemType::where('item_type', $validatedData['item_type'])->first();
+        $itemType = ItemType::where('id', $validatedData['item_type_id'])->first();
         $itemType->items()->save($item);
 
-        if (!empty($params['pictuimagesre'])) {
+        if (!empty($params['images'])) {
             // TODO
         }
 
@@ -57,31 +56,31 @@ class ItemController extends Controller
     public function autocompleteEditForm($itemId)
     {
         $item = Item::where('id', $itemId)->get()->first()->getInTextForm();
-        $illustrations = Arr::where($illustrations, function ($value, $key) use ($item) {
-            return $item['images'][0]['url']!=$value['url'];
-        });
-        if(empty($item['images'])) {
-            $item['images'] = array();
-        }
-        $item['images'] = array_merge($item['images'], $illustrations);
+        
+        // TODO IMAGES
 
         return view('edit', compact('item'));
     }
 
     public static function save($params) {
+        if (!empty($params['images'])) {
+            $images = $params['images'];
+            unset($params['images']);
+        }
         $item = Item::add($params);
 
         // ItemType
-        $itemType = ItemType::where('item_type', $params['item_type'])->first();
+        $itemType = ItemType::where('id', $params['item_type_id'])->first();
         $itemType->items()->save($item);
 
         // Images
-        if (!empty($params['images'])) {
-            // TODO
+        if (!empty($images)) {
+            $image = Image::add($images);
+            $image->items()->save($item);
         }
         
         return ['result' => 'successfull'];
-    }    
+    }
 
     public static function getAllItems() {
         return Item::with('images')->get();

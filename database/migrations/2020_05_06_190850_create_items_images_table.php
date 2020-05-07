@@ -17,7 +17,7 @@ class CreateItemsImagesTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('image_id');
-            $table->boolean('as_cover');
+            $table->boolean('as_cover')->default(FALSE);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
 

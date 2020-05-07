@@ -11,3 +11,5 @@ composer require symfony/psr-http-message-bridge
 
 
 php artisan make:request UserStoreRequest
+
+php artisan storage:link

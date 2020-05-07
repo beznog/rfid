@@ -5,8 +5,8 @@
             <li>
                 <div>
                     <div class="thumbnail" style="float: left; margin-right: 20px;">
-                        @isset($word->images[0]['thumbnail_url'])
-                            <img src="{{ $item->images[0]['thumbnail_url'] }}">
+                        @isset($item->images[0]['thumbnail_url'])
+                            <img src="{{ asset('storage/'.$item->images[0]['thumbnail_url']) }}">
                         @endisset
                     </div>
                     <div>
@@ -15,15 +15,15 @@
                         Type: {{ $item->itemTypes['item_type'] }}
                         <br>
                         Name: {{ $item->name }}
-                        @isset($word->description)
+                        @isset($item->description)
                             <br>
-                            Description: {{ $word->description }}
+                            Description: {{ $item->description }}
                         @endisset
-                        @isset($word->tagId)
+                        @isset($item->tagId)
                             <br>
-                            Tag ID: {{ $word->tagId }}
+                            Tag ID: {{ $item->tagId }}
                         @endisset
-
+                        <br>
                         {{ link_to_action('ItemController@autocompleteEditForm', 'edit', $parameters = array($item->id), $attributes = array('target' => '_blank')) }}  {{ link_to_action('ItemController@delete', 'delete', $parameters = array($item->id), $attributes = array()) }}
                     </div>
                 </div>

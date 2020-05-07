@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Item extends Model
 {
     protected $table = 'items';
+
+    protected $fillable = ['name','item_type_id','description','tag_id'];
+
+    public static function add($params) {
+        return self::firstOrCreate($params);
+    }
     
     public function getInTextForm()
     {
@@ -14,8 +20,8 @@ class Item extends Model
             'id' => $this->id,
             'name' => $this->name,
             'description' => (!empty($this->description)) ? $this->description : null,
-            'itemType' => $this->itemTypes->item_type,
-            'tagId' => (!empty($this->tag_id)) ? $this->tagtag_id : null,
+            'itemTypeId' => $this->item_type_id,
+            'tagId' => (!empty($this->tag_id)) ? $this->tag_id : null,
             'images' => (!empty($this->images->first())) ? array(
                 array(
                     'url' => $this->images->first()['url'],

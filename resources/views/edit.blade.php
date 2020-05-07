@@ -12,5 +12,5 @@
 	    </div>
 	@endif
 
-    @include('elements.form_create_word')
+    @include('elements.form_create_item')
 @endsection

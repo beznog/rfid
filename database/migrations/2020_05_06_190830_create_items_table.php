@@ -26,10 +26,6 @@ class CreateItemsTable extends Migration
             $table->foreign('item_type_id')
               ->references('id')->on('item_types')
               ->onDelete('cascade');
-
-
-
-            $table->softDeletes();
         });
     }
 

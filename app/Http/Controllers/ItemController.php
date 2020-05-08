@@ -82,6 +82,30 @@ class ItemController extends Controller
         return ['result' => 'successfull'];
     }
 
+    public function listSystems() {
+        $systems = array();
+
+        $items = Item::with('images')->where('item_type_id', '1')->get();
+
+        foreach($items as $item) {
+            $systems->push($item);
+            $components = $item->components;
+            $systems[$item]['components'] = array();
+
+            foreach($components as $component) {
+                $systems[$item]['components']->push($component);
+                $elements = $component->elements;
+                $systems[$item][$component]['elements'] = array();
+
+                foreach($elements as $element) {
+                    $systems[$item][$component]['elements']->push($element);                    
+                }
+            }
+        }
+
+        return view('systems_list', compact('systems'));
+    }
+
     public static function getAllItems() {
         return Item::with('images')->get();
     }

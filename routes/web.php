@@ -15,6 +15,9 @@
 // Main page
 Route::get('', 'ItemController@index');
 
+// Show all systems
+Route::get('list/systems', 'ItemController@listSystems');
+
 // Show all items
 Route::get('list', 'ItemController@list');
 

@@ -24,6 +24,7 @@ class Item extends Model
             'tagId' => (!empty($this->tag_id)) ? $this->tag_id : null,
             'images' => (!empty($this->images->first())) ? array(
                 array(
+                    'id' => $this->images->first()['id'],
                     'url' => $this->images->first()['url'],
                     'thumbnail_url' => $this->images->first()['thumbnail_url']
                 )

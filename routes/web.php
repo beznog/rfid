@@ -39,5 +39,8 @@ Route::post('edit/{itemId}', 'ItemController@edit');
 // Delete item
 Route::get('delete/{itemId}', 'ItemController@delete');
 
+// Delete image from item
+Route::get('delete/image/{itemId}', 'ItemController@deleteImage');
+
 // Scan items
 Route::get('scan/{itemId}', 'ItemController@scan');

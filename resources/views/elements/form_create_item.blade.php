@@ -69,27 +69,17 @@
 </div>
 
 
-<div class="cell small-12 parameter default" data-parameter-name="add_tag">
-    <fieldset class="ajax-form" id="add_tag" data-action="/add_label.php" data-method="get" data-enctype="text/plain">
-        <div class="input-group">
-            <input id="add_tag_text" class="input-group-field" type="text" name="add_tag" placeholder="Enter Tag">
-            <div class="input-group-button">
-                <input id="add_tag_submit" data-form="add_tag" class="ajax-form-submit button" value="Add">
-            </div>
-        </div>
-    </fieldset>
-    
-</div>
-
 <div class="cell small-12 parameter default" data-parameter-name="images">
     <span class="added-image">
-        <div class="image">
-            <a href="#">
-                <div class="thumbnail">
-                    <img src="{{ $item['image']['thumbnail_url'] }}">
+        @isset($item['images'][0])
+            <div class="image">
+                <div class="thumbnail" style="background-image: url({{  (isset($item['images'][0]['thumbnail_url'])) ? asset('storage/'.$item['images'][0]['thumbnail_url']) : ''  }});">
+                    <a href="{{ asset('delete/image/'.$item['id']) }}">
+                        <i class="fi-trash delete-button"></i>
+                    </a>
                 </div>
-            </a>
-        </div>
+            </div>
+        @endisset
     </span>
     {{ Form::file(
             'images'

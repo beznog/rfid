@@ -3,6 +3,7 @@
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <title>{{ config('app.name') }}</title>
 {{ Html::style('css/foundation.css') }}
+{{ Html::style('fonts/foundation-icons/foundation-icons.css') }}
 {{ Html::style('css/app.css') }}
 {{ Html::style('css/jquery-ui.css') }}
 {{ Html::style('css/custom.css') }}

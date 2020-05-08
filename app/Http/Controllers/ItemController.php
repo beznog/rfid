@@ -35,14 +35,16 @@ class ItemController extends Controller
 
     public function edit(CreateItemRequest $request) {
         $validatedData = $request->validated();
+        //dd($validatedData);
         $item = Item::where('id', $validatedData['id'])->get()->first();
         $item->update($validatedData);
 
         $itemType = ItemType::where('id', $validatedData['item_type_id'])->first();
         $itemType->items()->save($item);
 
-        if (!empty($params['images'])) {
-            // TODO
+        if (!empty($validatedData['images'])) {
+            $image = Image::add($validatedData['images']);
+            $image->items()->save($item);
         }
 
         return ['result' => 'successfull'];
@@ -83,27 +85,16 @@ class ItemController extends Controller
     }
 
     public function listSystems() {
-        $systems = array();
-
-        $items = Item::with('images')->where('item_type_id', '1')->get();
-
-        foreach($items as $item) {
-            $systems->push($item);
-            $components = $item->components;
-            $systems[$item]['components'] = array();
-
-            foreach($components as $component) {
-                $systems[$item]['components']->push($component);
-                $elements = $component->elements;
-                $systems[$item][$component]['elements'] = array();
-
-                foreach($elements as $element) {
-                    $systems[$item][$component]['elements']->push($element);                    
-                }
-            }
-        }
+        $systems = Item::with(['images', 'components', 'components.images', 'components.elements', 'components.elements.images', 'elements'])->where('item_type_id', '1')->get();
 
         return view('systems_list', compact('systems'));
+    }
+
+    public function deleteImage($itemId) {
+        $item = Item::where('id', $itemId)->first();
+        $item->images()->detach();
+
+        return redirect()->back();
     }
 
     public static function getAllItems() {

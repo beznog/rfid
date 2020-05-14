@@ -43,7 +43,7 @@ Route::get('delete/{itemId}', 'ItemController@delete');
 Route::get('delete/image/{itemId}', 'ItemController@deleteImage');
 
 // Scan items
-Route::post('scan/{itemId}', , function ($itemId) {
+Route::post('scan/{itemId}', function ($itemId) {
     echo "$itemId";
 });
 

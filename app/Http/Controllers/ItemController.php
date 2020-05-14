@@ -9,6 +9,7 @@ use Illuminate\Support\Arr;
 use App\Item;
 use App\ItemType;
 use App\Image;
+use App\Events\MyEvent;
 
 use App\Http\Requests\CreateItemRequest;
 
@@ -122,5 +123,13 @@ class ItemController extends Controller
 
     public function getItemByTagId($tagId) {
         return Item::where('tag_id', $tagId)->get()->first();
+    }
+
+    public function scanItems($ItemId) {
+        event(new MyEvent($ItemId));
+        return $ItemId;
+        //event(new MyEvent("Hallo"));
+        //dd($request);
+        //return Item::where('tag_id', $tagId)->get()->first();
     }
 }

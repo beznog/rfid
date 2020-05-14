@@ -11,7 +11,6 @@
 |
 */
 
-
 // Main page
 Route::get('', 'ItemController@index');
 
@@ -43,11 +42,13 @@ Route::get('delete/{itemId}', 'ItemController@delete');
 Route::get('delete/image/{itemId}', 'ItemController@deleteImage');
 
 // Scan items
-Route::post('scan/{itemId}', function ($itemId) {
+/*Route::post('scan/{itemId}', function ($itemId) {
 	event(new MyEvent($itemId));
     echo "$itemId";
+});*/
+
+Route::get('scan/', function () {
+	return view('scan');
 });
 
-Route::get('scan/{itemId}', function ($itemId) {
-    return view("scan");
-});
+Route::get('scan/{itemId}', 'ItemController@scanItems');

@@ -44,9 +44,10 @@ Route::get('delete/image/{itemId}', 'ItemController@deleteImage');
 
 // Scan items
 Route::post('scan/{itemId}', function ($itemId) {
+	event(new MyEvent($itemId));
     echo "$itemId";
 });
 
 Route::get('scan/{itemId}', function ($itemId) {
-    echo "$itemId";
+    return view("scan");
 });

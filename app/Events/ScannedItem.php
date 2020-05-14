@@ -7,15 +7,15 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class MyEvent implements ShouldBroadcast
+class ScannedItem implements ShouldBroadcast
 {
   use Dispatchable, InteractsWithSockets, SerializesModels;
 
-  public $message;
+  public $itemId;
 
-  public function __construct($message)
+  public function __construct($itemId)
   {
-      $this->message = $message;
+      $this->itemId = $itemId;
   }
 
   public function broadcastOn()

@@ -7,3 +7,5 @@
 {{ Html::style('css/app.css') }}
 {{ Html::style('css/jquery-ui.css') }}
 {{ Html::style('css/custom.css') }}
+
+<script src="https://js.pusher.com/6.0/pusher.min.js"></script>

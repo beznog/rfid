@@ -18,3 +18,5 @@ composer dump-autoload
 composer install
 
 composer update
+
+php artisan make:event MyEvent

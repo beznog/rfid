@@ -14,12 +14,12 @@
                         <div class="media-object-section">
                             <h4>{{ $system->name }}</h4>
                             <p>{{ $system->description }}</p>
-                            {{ link_to_action('ItemController@autocompleteEditForm', 'edit', $parameters = array($system->id), $attributes = array()) }}
                         </div>
                     </div>
                 </a>
                 <div class="accordion-content" data-tab-content>
                     <div class="cell small-12">
+                        {{ link_to_action('ItemController@autocompleteEditForm', 'edit', $parameters = array($system->id), $attributes = array()) }}
                         @if(!empty($system->components))
                             <ul class="accordion cell small-12" data-accordion data-allow-all-closed="true" data-multi-expand="true">
                                 @foreach ($system->components as $component)
@@ -33,11 +33,11 @@
                                                 <div class="media-object-section">
                                                     <h4>{{ $component->name }}</h4>
                                                     <p>{{ $component->description }}</p>
-                                                    {{ link_to_action('ItemController@autocompleteEditForm', 'edit', $parameters = array($component->id), $attributes = array()) }}
                                                 </div>
                                             </div>
                                         </a>
                                         <div class="accordion-content" data-tab-content>
+                                            {{ link_to_action('ItemController@autocompleteEditForm', 'edit', $parameters = array($component->id), $attributes = array()) }}
                                             @if(!empty($component->elements))
                                                 @foreach ($component->elements as $element)
                                                     <div class="media-object cell small-12 callout alert" data-tagid="{{ $element->tag_id }}">

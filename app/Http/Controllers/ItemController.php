@@ -48,7 +48,7 @@ class ItemController extends Controller
             $image->items()->save($item);
         }
 
-        return ['result' => 'successfull'];
+        return view('edit');
     }
 
     public static function delete($itemId) {

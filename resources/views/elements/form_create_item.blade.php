@@ -103,3 +103,20 @@
 
 
 {!! Form::close() !!}
+
+<script>
+    // Enable pusher logging - don't include this in production
+    Pusher.logToConsole = true;
+
+    var pusher = new Pusher('cf2a99a82e6f0c9cde6a', {
+      cluster: 'eu'
+    });
+
+    var channel = pusher.subscribe('my-channel');
+    channel.bind('my-event', function(data) {
+        var scannedId = JSON.parse(data.itemId);
+        var idInput = $("body").find($('[name=tag_id]'));
+        $(idInput).val(scannedId);
+        console.log(scannedId);
+    });
+</script>

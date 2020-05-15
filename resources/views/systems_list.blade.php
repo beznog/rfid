@@ -73,5 +73,17 @@
         <h5>No system found</h5>
     </div>
 @endif
+    <script>
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
 
+        var pusher = new Pusher('cf2a99a82e6f0c9cde6a', {
+          cluster: 'eu'
+        });
+
+        var channel = pusher.subscribe('my-channel');
+        channel.bind('my-event', function(data) {
+          alert(JSON.stringify(data));
+        });
+    </script>
 @endsection

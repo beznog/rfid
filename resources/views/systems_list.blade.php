@@ -8,7 +8,7 @@
                 <a href="#" class="accordion-title">
                     <div class="media-object cell small-12 callout alert" data-tagid="{{ $system->tag_id }}">
                         <div class="media-object-section">
-                            <div class="thumbnail" style="background-image: url({{ (isset($system->images)) ? asset('storage/'.$system->images->first()['thumbnail_url']) : '' }});">
+                            <div class="thumbnail" style="background-image: url('{{ (isset($system->images)) ? asset('storage/'.$system->images->first()['thumbnail_url']) : '' }}');">
                             </div>
                         </div>
                         <div class="media-object-section">
@@ -26,7 +26,7 @@
                                         <a href="#" class="accordion-title">
                                             <div class="media-object cell small-12 callout alert" data-tagid="{{ $component->tag_id }}">
                                                 <div class="media-object-section">
-                                                    <div class="thumbnail" style="background-image: url({{ (isset($component->images)) ? asset('storage/'.$component->images->first()['thumbnail_url']) : '' }});">
+                                                    <div class="thumbnail" style="background-image: url('{{ (isset($component->images)) ? asset('storage/'.$component->images->first()['thumbnail_url']) : '' }}');">
                                                     </div>
                                                 </div>
                                                 <div class="media-object-section">
@@ -40,7 +40,7 @@
                                                 @foreach ($component->elements as $element)
                                                     <div class="media-object cell small-12 callout alert" data-tagid="{{ $element->tag_id }}">
                                                         <div class="media-object-section">
-                                                            <div class="thumbnail" style="background-image: url({{ (isset($element->images)) ? asset('storage/'.$element->images->first()['thumbnail_url']) : '' }});">
+                                                            <div class="thumbnail" style="background-image: url('{{ (isset($element->images)) ? asset('storage/'.$element->images->first()['thumbnail_url']) : '' }}');">
                                                             </div>
                                                         </div>
                                                         <div class="media-object-section">

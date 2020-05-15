@@ -6,7 +6,7 @@
         @foreach ($systems as $system)
             <li class="accordion-item " data-accordion-item>
                 <a href="#" class="accordion-title">
-                    <div class="media-object cell small-12">
+                    <div class="media-object cell small-12 callout alert" data-tagid="{{ $system->tag_id }}">
                         <div class="media-object-section">
                             <div class="thumbnail" style="background-image: url({{ (isset($system->images)) ? asset('storage/'.$system->images->first()['thumbnail_url']) : '' }});">
                             </div>
@@ -24,7 +24,7 @@
                                 @foreach ($system->components as $component)
                                     <li class="accordion-item " data-accordion-item>
                                         <a href="#" class="accordion-title">
-                                            <div class="media-object cell small-12">
+                                            <div class="media-object cell small-12 callout alert" data-tagid="{{ $component->tag_id }}">
                                                 <div class="media-object-section">
                                                     <div class="thumbnail" style="background-image: url({{ (isset($component->images)) ? asset('storage/'.$component->images->first()['thumbnail_url']) : '' }});">
                                                     </div>
@@ -38,7 +38,7 @@
                                         <div class="accordion-content" data-tab-content>
                                             @if(!empty($component->elements))
                                                 @foreach ($component->elements as $element)
-                                                    <div class="media-object cell small-12">
+                                                    <div class="media-object cell small-12 callout alert" data-tagid="{{ $element->tag_id }}">
                                                         <div class="media-object-section">
                                                             <div class="thumbnail" style="background-image: url({{ (isset($element->images)) ? asset('storage/'.$element->images->first()['thumbnail_url']) : '' }});">
                                                             </div>
@@ -83,7 +83,11 @@
 
         var channel = pusher.subscribe('my-channel');
         channel.bind('my-event', function(data) {
-          alert(JSON.stringify(data));
+            var scannedId = JSON.stringify(data.itemId);
+            var param = $("body").find($('[data-tagid='+ scannedId +']'));
+            $(param).removeClass('alert');
+            $(param).addClass('success');
+            console.log(param);
         });
     </script>
 @endsection

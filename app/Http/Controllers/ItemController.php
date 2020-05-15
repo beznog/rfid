@@ -87,7 +87,7 @@ class ItemController extends Controller
 
     public function listSystems() {
         $systems = Item::with(['images', 'components', 'components.images', 'components.elements', 'components.elements.images', 'elements'])->where('item_type_id', '1')->get();
-
+        //dd($systems);
         return view('systems_list', compact('systems'));
     }
 

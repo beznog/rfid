@@ -9,3 +9,4 @@
 {{ Html::style('css/custom.css') }}
 
 <script src="https://js.pusher.com/6.0/pusher.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>

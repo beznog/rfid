@@ -196,3 +196,7 @@ li {
   display: block;
   background-color: #ffffff;
 }
+
+.accordion-title {
+  text-align: left;
+}

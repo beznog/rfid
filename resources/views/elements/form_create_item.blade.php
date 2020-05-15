@@ -104,6 +104,13 @@
 
 {!! Form::close() !!}
 
+<br>
+<br>
+<a href="{{ asset('list/systems') }}">To Systems List</a>
+
+<br>
+<br>
+
 <script>
     // Enable pusher logging - don't include this in production
     Pusher.logToConsole = true;

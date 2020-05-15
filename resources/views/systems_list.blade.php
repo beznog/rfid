@@ -14,6 +14,7 @@
                         <div class="media-object-section">
                             <h4>{{ $system->name }}</h4>
                             <p>{{ $system->description }}</p>
+                            {{ link_to_action('ItemController@autocompleteEditForm', 'edit', $parameters = array($system->id), $attributes = array()) }}
                         </div>
                     </div>
                 </a>
@@ -32,6 +33,7 @@
                                                 <div class="media-object-section">
                                                     <h4>{{ $component->name }}</h4>
                                                     <p>{{ $component->description }}</p>
+                                                    {{ link_to_action('ItemController@autocompleteEditForm', 'edit', $parameters = array($component->id), $attributes = array()) }}
                                                 </div>
                                             </div>
                                         </a>
@@ -46,6 +48,7 @@
                                                         <div class="media-object-section">
                                                             <h4>{{ $element->name }}</h4>
                                                             <p>{{ $element->description }}</p>
+                                                            {{ link_to_action('ItemController@autocompleteEditForm', 'edit', $parameters = array($system->id), $attributes = array()) }}
                                                         </div>
                                                     </div>
                                                 @endforeach

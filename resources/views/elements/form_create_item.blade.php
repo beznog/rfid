@@ -114,10 +114,11 @@
 
     var channel = pusher.subscribe('my-channel');
     channel.bind('my-event', function(data) {
-        var scannedId = JSON.stringify(data.itemId);
-        scannedId = JSON.parse(data.itemId);
-        var idInput = $("body").find($('[name=tag_id]'));
-        $(idInput).val(scannedId);
-        console.log(scannedId);
+        data = JSON.stringify(data);
+        data = JSON.parse(data);
+        console.log(data);
+        
+        $("body").find($('[name=tag_id]')).val(data.itemId);
+        console.log(data.itemId);
     });
 </script>

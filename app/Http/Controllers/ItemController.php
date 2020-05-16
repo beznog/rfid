@@ -126,9 +126,7 @@ class ItemController extends Controller
     }
 
     public function scanItems(Request $request) {
-        dd($request->itemIds);
-
-        //event(new ScannedItem($ItemId));
+        event(new ScannedItem($ItemId));
         return $ItemId;
     }
 }

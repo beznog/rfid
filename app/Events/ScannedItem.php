@@ -11,11 +11,11 @@ class ScannedItem implements ShouldBroadcast
 {
   use Dispatchable, InteractsWithSockets, SerializesModels;
 
-  public $itemId;
+  public $itemIds;
 
-  public function __construct($itemId)
+  public function __construct($itemIds)
   {
-      $this->itemId = $itemId;
+      $this->itemIds = $itemIds;
   }
 
   public function broadcastOn()

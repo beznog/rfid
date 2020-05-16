@@ -128,6 +128,9 @@ class ItemController extends Controller
     public function scanItems(Request $request) {
         //event(new ScannedItem($request));
         //dd($request);
-        return $request->itemIds;
+        if(!empty($request->itemIds)) {
+            return $request->itemIds;
+        }
+        return "No data";
     }
 }

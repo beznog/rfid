@@ -125,8 +125,10 @@ class ItemController extends Controller
         return Item::where('tag_id', $tagId)->get()->first();
     }
 
-    public function scanItems($ItemId) {
-        event(new ScannedItem($ItemId));
+    public function scanItems(Request $request) {
+        dd($request->itemIds);
+
+        //event(new ScannedItem($ItemId));
         return $ItemId;
     }
 }

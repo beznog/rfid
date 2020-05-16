@@ -130,6 +130,6 @@ class ItemController extends Controller
             event(new ScannedItem($request->itemIds));
             return $request->itemIds;
         }
-        return $request;
+        return "No Data: " + $request;
     }
 }

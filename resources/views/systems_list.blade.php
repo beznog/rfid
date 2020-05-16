@@ -87,11 +87,21 @@
         var channel = pusher.subscribe('my-channel');
         channel.bind('my-event', function(data) {
             console.log(data);
-            var scannedId = JSON.stringify(data.itemIds);
+            var dataJSON = JSON.stringify(data);
+		dataJSON = JSON.parse(dataJSON);
+		console.log(dataJSON.itemIds);
+            for (var i=0; i<dataJSON.itemIds.length; i++) {
+		console.log(dataJSON.itemIds[i]);
+		var param = $("body").find($('[data-tagid=' + dataJSON.itemIds[i] +']'));
+                $(param).removeClass('alert');
+                $(param).addClass('success');
+
+            }
+
             //var param = $("body").find($('[data-tagid='+ scannedId +']'));
             //$(param).removeClass('alert');
             //$(param).addClass('success');
-            console.log(scannedId);
+//            console.log(scannedId);
         });
     </script>
 @endsection

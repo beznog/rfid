@@ -127,6 +127,7 @@ class ItemController extends Controller
 
     public function scanItems(Request $request) {
         //event(new ScannedItem($request));
-        return print_r($request);
+        dd($request);
+        return dd($request);
     }
 }

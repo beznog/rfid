@@ -117,6 +117,8 @@
                                         <span class="show-for-sr">{{ $component->name }}}</span>
                                       </label>
                                     </div>
+                                </div>
+                                <div class="media-object-section">
                                     <div class="thumbnail" style="background-image: url('{{ (!empty($component->images->count())) ? asset('storage/'.$component->images->first()['thumbnail_url']) : asset('storage/no-image.png') }}');">
                                     </div>
                                 </div>
@@ -165,6 +167,8 @@
                                         <span class="show-for-sr">{{ $component->name }}}</span>
                                       </label>
                                     </div>
+                                </div>
+                                <div class="media-object-section">
                                     <div class="thumbnail" style="background-image: url('{{ (!empty($element->images->count())) ? asset('storage/'.$element->images->first()['thumbnail_url']) : asset('storage/no-image.png') }}');">
                                     </div>
                                 </div>

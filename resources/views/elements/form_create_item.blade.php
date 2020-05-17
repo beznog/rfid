@@ -96,7 +96,7 @@
         </a>
         <div class="accordion-content" data-tab-content>
             <div class="cell small-12">
-                @if(!empty($components))
+                @if(!empty($components->count()))
 
                     @if(!empty($item->components))
                         @php
@@ -146,7 +146,7 @@
         </a>
         <div class="accordion-content" data-tab-content>
             <div class="cell small-12">
-                @if(!empty($elements))
+                @if(!empty($elements->count()))
                     
                     @if(!empty($item->elements))
                         @php

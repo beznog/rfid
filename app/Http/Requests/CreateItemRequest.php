@@ -52,7 +52,11 @@ class CreateItemRequest extends FormRequest
                 'nullable',
                 'string',
                 'max:32'
-            ]
+            ],
+            'components' => [
+                'nullable',
+                'array'
+            ],
         ];
     }
 

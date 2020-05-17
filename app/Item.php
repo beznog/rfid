@@ -40,6 +40,10 @@ class Item extends Model
         return $this->belongsToMany('App\Image', 'items_images', 'item_id', 'image_id');
     }
 
+    public function systems() {
+        return $this->belongsToMany('App\Item', 'systems_components', 'component_id', 'system_id');
+    }
+
     public function components() {
         return $this->belongsToMany('App\Item', 'systems_components', 'system_id', 'component_id');
     }
@@ -48,11 +52,7 @@ class Item extends Model
         return $this->belongsToMany('App\Item', 'components_elements', 'component_id', 'element_id');
     }
 
-    public function getParentComponent() {
-        // TODO
-    }
-
-    public function getParentSystem() {
-        // TODO
+    public function componentsParent() {
+        return $this->belongsToMany('App\Item', 'components_elements', 'element_id', 'component_id');
     }
 }

@@ -30,3 +30,6 @@ composer require pusher/pusher-php-server
 php artisan serve --host 172.31.21.73 --port 8000
 
 
+composer require intervention/image
+php artisan vendor:publish --provider="Intervention\Image\ImageServiceProviderLaravelRecent"
+

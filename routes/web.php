@@ -12,7 +12,7 @@
 */
 
 // Main page
-Route::get('', 'ItemController@index');
+Route::get('', 'ItemController@listSystems');
 
 // Show all systems
 Route::get('list/systems', 'ItemController@listSystems');
@@ -35,20 +35,18 @@ Route::get('edit/{itemId}', 'ItemController@autocompleteEditForm');
 // Edit item
 Route::post('edit/{itemId}', 'ItemController@edit');
 
+
+
 // Delete item
 Route::get('delete/{itemId}', 'ItemController@delete');
 
 // Delete image from item
 Route::get('delete/image/{itemId}', 'ItemController@deleteImage');
 
+
+
 // Scan items
-/*Route::post('scan/{itemId}', function ($itemId) {
-	event(new MyEvent($itemId));
-    echo "$itemId";
-});*/
+Route::post('scan', 'ItemController@scan');
 
-/*Route::post('scan/', function ($itemIds) {
-	return view('scan');
-});*/
-
-Route::post('scan', 'ItemController@scanItems');
+// Scan items
+Route::get('scan/{itemId}', 'ItemController@scanItem');

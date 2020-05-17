@@ -2,7 +2,11 @@
 
 namespace App;
 
+use Intervention\Image\Facades\Image as Images;
+
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Model;
+
 
 class Image extends Model
 {
@@ -10,9 +14,16 @@ class Image extends Model
     protected $fillable = ['url', 'thumbnail_url'];
 
     public static function add($params) {
-    	$file = $params->storeAs('covers', $params->getClientOriginalName());
 
-        return self::firstOrCreate(array('url' => $file, 'thumbnail_url' => $file));
+    	$origFileName = $params->getClientOriginalName();
+    	$file = $params->storeAs('covers', $origFileName);
+
+    	$filePath = Storage::path($file);
+
+    	$thumb = Images::make($filePath)->fit(120)->encode();
+		$store = Storage::put('thumbnails/'.$origFileName, $thumb->__toString());
+
+        return self::firstOrCreate(array('url' => 'covers/'.$origFileName, 'thumbnail_url' => 'thumbnails/'.$origFileName));
     }
 
      public function items() {

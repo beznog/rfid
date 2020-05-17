@@ -19,7 +19,10 @@ class ItemController extends Controller
 {
     public function index()
     {
-        return view('start_screen');
+        $components = Item::with(['images'])->where('item_type_id', '2')->get();
+        $elements = Item::with(['images'])->where('item_type_id', '3')->get();
+        //dd($components);
+        return view('add', compact(['components', 'elements']));
     }
 
     public static function list()
@@ -48,21 +51,33 @@ class ItemController extends Controller
             $image->items()->save($item);
         }
 
-        return view('edit');
+
+        if (!empty($validatedData['components'])) {
+            $item->components()->sync($validatedData['components']);
+        }
+
+        if (!empty($validatedData['elements'])) {
+            $item->elements()->sync($validatedData['elements']);
+        }
+
+        return redirect()->back()->with('message', 'Successfull saved');
+        //return view('edit');
     }
 
     public static function delete($itemId) {
         Item::find($itemId)->delete();
-        return ['result' => 'successfull'];
+        return redirect()->back()->with('message', 'Successfull deleted');
     }
 
     public function autocompleteEditForm($itemId)
     {
-        $item = Item::where('id', $itemId)->get()->first()->getInTextForm();
-        
-        // TODO IMAGES
+        //$item = Item::where('id', $itemId)->get()->first()->getInTextForm();
+        $item = Item::with(['images', 'components', 'components.images', 'components.elements', 'components.elements.images', 'elements'])->where('id', $itemId)->get()->first();
 
-        return view('edit', compact('item'));
+        $components = Item::with(['images'])->where('item_type_id', '2')->get();
+        $elements = Item::with(['images'])->where('item_type_id', '3')->get();
+        //dd($item);
+        return view('edit', compact(['item', 'components', 'elements']));
     }
 
     public static function save($params) {
@@ -70,11 +85,38 @@ class ItemController extends Controller
             $images = $params['images'];
             unset($params['images']);
         }
+
+        if (!empty($params['components'])) {
+            $components = $params['components'];
+            unset($params['components']);
+        }
+
+        if (!empty($params['elements'])) {
+            $components = $params['elements'];
+            unset($params['elements']);
+        }
+
         $item = Item::add($params);
 
         // ItemType
         $itemType = ItemType::where('id', $params['item_type_id'])->first();
         $itemType->items()->save($item);
+
+
+        if (!empty($components)) {
+            foreach ($components as $componentId) {
+                $component = Item::where('id', $componentId)->first();
+                $component->systems()->save($item);
+            }
+        }
+
+        if (!empty($elements)) {
+            foreach ($elements as $elementId) {
+                $element = Item::where('id', $elementId)->first();
+                $element->componentsParent()->save($item);
+            }
+        }
+
 
         // Images
         if (!empty($images)) {
@@ -82,12 +124,13 @@ class ItemController extends Controller
             $image->items()->save($item);
         }
         
-        return ['result' => 'successfull'];
+        return redirect()->back()->with('message', 'Successfull saved');
+        //return ['result' => 'successfull'];
     }
 
     public function listSystems() {
         $systems = Item::with(['images', 'components', 'components.images', 'components.elements', 'components.elements.images', 'elements'])->where('item_type_id', '1')->get();
-        //dd($systems);
+
         return view('systems_list', compact('systems'));
     }
 
@@ -125,11 +168,16 @@ class ItemController extends Controller
         return Item::where('tag_id', $tagId)->get()->first();
     }
 
-    public function scanItems(Request $request) {
+    public function scan(Request $request) {
         if(!empty($request->itemIds)) {
             event(new ScannedItem($request->itemIds));
             return $request->itemIds;
         }
         return "No Data: " + $request;
+    }
+
+    public function scanItem($itemId) {
+        $system = Item::with(['images', 'components', 'components.images', 'components.elements', 'components.elements.images', 'elements'])->where('id', $itemId)->get()->first();
+        return view('scan', compact('system'));
     }
 }

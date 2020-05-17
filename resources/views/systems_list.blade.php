@@ -1,14 +1,24 @@
 @extends('main')
 @section('content')
 
-@if(!empty($systems))
-    <ul class="accordion cell small-12" data-accordion data-allow-all-closed="true" data-multi-expand="true">
+@if(!empty($systems->count()))
         @foreach ($systems as $system)
+        <div class="buttons-container">
+            <a class="button primary" target="_self" href="{{ asset('scan/'.$system->id) }}">
+                <i class="fi-sound"></i>
+                Scan
+            </a>
+            <a class="button primary" target="_self" href="{{ asset('edit/'.$system->id) }}">
+                <i class="fi-pencil"></i>
+                Edit
+            </a>
+        </div>
+        <ul class="accordion cell small-12" data-accordion data-allow-all-closed="true" data-multi-expand="true">
             <li class="accordion-item " data-accordion-item>
                 <a href="#" class="accordion-title">
-                    <div class="media-object cell small-12 callout alert" data-tagid="{{ $system->tag_id }}">
+                    <div class="media-object cell small-12 callout secondary" data-tagid="{{ $system->tag_id }}">
                         <div class="media-object-section">
-                            <div class="thumbnail" style="background-image: url('{{ (isset($system->images)) ? asset('storage/'.$system->images->first()['thumbnail_url']) : '' }}');">
+                            <div class="thumbnail" style="background-image: url('{{ (!empty($system->images->count())) ? asset('storage/'.$system->images->first()['thumbnail_url']) : asset('storage/no-image.png') }}');">
                             </div>
                         </div>
                         <div class="media-object-section">
@@ -17,17 +27,27 @@
                         </div>
                     </div>
                 </a>
+
                 <div class="accordion-content" data-tab-content>
                     <div class="cell small-12">
-                        {{ link_to_action('ItemController@autocompleteEditForm', 'edit', $parameters = array($system->id), $attributes = array()) }}
-                        @if(!empty($system->components))
+                        @if(!empty($system->components->count()))
                             <ul class="accordion cell small-12" data-accordion data-allow-all-closed="true" data-multi-expand="true">
                                 @foreach ($system->components as $component)
+                                    <div class="buttons-container">
+                                        <a class="button primary" target="_self" href="{{ asset('scan/'.$component->id) }}">
+                                            <i class="fi-sound"></i>
+                                            Scan
+                                        </a>
+                                        <a class="button primary" target="_self" href="{{ asset('edit/'.$component->id) }}">
+                                            <i class="fi-pencil"></i>
+                                            Edit
+                                        </a>
+                                    </div>
                                     <li class="accordion-item " data-accordion-item>
                                         <a href="#" class="accordion-title">
-                                            <div class="media-object cell small-12 callout alert" data-tagid="{{ $component->tag_id }}">
+                                            <div class="media-object cell small-12 callout secondary" data-tagid="{{ $component->tag_id }}">
                                                 <div class="media-object-section">
-                                                    <div class="thumbnail" style="background-image: url('{{ (isset($component->images)) ? asset('storage/'.$component->images->first()['thumbnail_url']) : '' }}');">
+                                                    <div class="thumbnail" style="background-image: url('{{ (!empty($component->images->count())) ? asset('storage/'.$component->images->first()['thumbnail_url']) : asset('storage/no-image.png') }}');">
                                                     </div>
                                                 </div>
                                                 <div class="media-object-section">
@@ -37,18 +57,27 @@
                                             </div>
                                         </a>
                                         <div class="accordion-content" data-tab-content>
-                                            {{ link_to_action('ItemController@autocompleteEditForm', 'edit', $parameters = array($component->id), $attributes = array()) }}
-                                            @if(!empty($component->elements))
+
+                                            @if(!empty($component->elements->count()))
                                                 @foreach ($component->elements as $element)
-                                                    <div class="media-object cell small-12 callout alert" data-tagid="{{ $element->tag_id }}">
+                                                    <div class="buttons-container">
+                                                        <a class="button primary" target="_self" href="{{ asset('scan/'.$element->id) }}">
+                                                            <i class="fi-sound"></i>
+                                                            Scan
+                                                        </a>
+                                                        <a class="button primary" target="_self" href="{{ asset('edit/'.$element->id) }}">
+                                                            <i class="fi-pencil"></i>
+                                                            Edit
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-object cell small-12 callout secondary" data-tagid="{{ $element->tag_id }}">
                                                         <div class="media-object-section">
-                                                            <div class="thumbnail" style="background-image: url('{{ (isset($element->images)) ? asset('storage/'.$element->images->first()['thumbnail_url']) : '' }}');">
+                                                            <div class="thumbnail" style="background-image: url('{{ (!empty($element->images->count())) ? asset('storage/'.$element->images->first()['thumbnail_url']) : asset('storage/no-image.png') }}');">
                                                             </div>
                                                         </div>
                                                         <div class="media-object-section">
                                                             <h4>{{ $element->name }}</h4>
                                                             <p>{{ $element->description }}</p>
-                                                            {{ link_to_action('ItemController@autocompleteEditForm', 'edit', $parameters = array($system->id), $attributes = array()) }}
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -69,8 +98,8 @@
                     </div>
                 </div>
             </li>
+        </ul>  
         @endforeach
-    </ul>  
 @else
     <div class="callout alert">
         <h5>No system found</h5>

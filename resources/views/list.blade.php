@@ -1,34 +1,38 @@
 @extends('main')
 @section('content')
+
+    <div class="navi-btn-container cell small-12">
+        <a href="{{ url()->previous() }}" class="button">
+          <i class="fi-arrow-left"></i>
+          Back
+        </a>
+    </div>
+
     <ul>
         @foreach ($items as $item)
             <li>
-                <div>
-                    <div class="thumbnail" style="float: left; margin-right: 20px;">
-                        @isset($item->images[0]['thumbnail_url'])
-                            <img src="{{ asset('storage/'.$item->images[0]['thumbnail_url']) }}">
-                        @endisset
+                <div class="media-object cell small-12 callout secondary" data-tagid="{{ $item->tag_id }}">
+                    <div class="media-object-section">
+                        <div class="thumbnail" style="background-image: url('{{ (!empty($item->images->count())) ? asset('storage/'.$item->images->first()['thumbnail_url']) : asset('storage/no-image.png') }}');">
+                        </div>
                     </div>
-                    <div>
-                        id: {{ $item->id }}
-                        <br>
-                        Type: {{ $item->itemTypes['item_type'] }}
-                        <br>
-                        Name: {{ $item->name }}
-                        @isset($item->description)
-                            <br>
-                            Description: {{ $item->description }}
-                        @endisset
-                        @isset($item->tagId)
-                            <br>
-                            Tag ID: {{ $item->tagId }}
-                        @endisset
-                        <br>
-                        {{ link_to_action('ItemController@autocompleteEditForm', 'edit', $parameters = array($item->id), $attributes = array('target' => '_blank')) }}  {{ link_to_action('ItemController@delete', 'delete', $parameters = array($item->id), $attributes = array()) }}
+                    <div class="media-object-section">
+                        <h6>Type: {{ $item->item_type_id }}</h6>
+                        <h4>{{ $item->name }}</h4>
+                        <p>{{ $item->description }}</p>
+
+                        <div class="buttons-container">
+                            <a class="button primary" target="_self" href="{{ asset('scan/'.$item->id) }}">
+                                <i class="fi-sound"></i>
+                                Scan
+                            </a>
+                            <a class="button primary" target="_self" href="{{ asset('edit/'.$item->id) }}">
+                                <i class="fi-pencil"></i>
+                                Edit
+                            </a>
+                        </div>
                     </div>
                 </div>
-                <br>
-                <br>            
             </li>
         @endforeach
     </ul>

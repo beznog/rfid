@@ -169,9 +169,10 @@ class ItemController extends Controller
     }
 
     public function scan(Request $request) {
+	//dd($request);
         if(!empty($request->itemIds)) {
             event(new ScannedItem($request->itemIds));
-            return $request->itemIds;
+            return json_encode(["response" => $request->itemIds]);
         }
         return "No Data: " + $request;
     }

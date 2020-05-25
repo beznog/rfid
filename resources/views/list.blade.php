@@ -30,6 +30,10 @@
                                 <i class="fi-pencil"></i>
                                 Edit
                             </a>
+                            <a class="button primary" target="_self" href="{{ asset('delete/'.$item->id) }}">
+                                <i class="fi-trash"></i>
+                                Delete
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -96,7 +96,7 @@
             for (var i=0; i<dataJSON.itemIds.length; i++) {
               console.log(dataJSON.itemIds[i]);
               var param = $("body").find($('[data-tagid=' + dataJSON.itemIds[i] +']'));
-
+              markItem(param);
             }
         });
 

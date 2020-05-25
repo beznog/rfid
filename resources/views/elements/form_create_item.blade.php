@@ -158,7 +158,7 @@
                             <div class="media-object cell small-12 callout secondary" data-tagid="{{ $element->tag_id }}">
                                 <div class="media-object-section">
                                     <div class="switch">
-                                      <input class="switch-input" id="element-{{ $element->id }}" type="checkbox" name="elements" value="{{ $element->id }}"
+                                      <input class="switch-input" id="element-{{ $element->id }}" type="checkbox" name="elements[]" value="{{ $element->id }}"
                                       @if(!empty($relatedElements))
                                             @if (in_array($element->id, $relatedElements)) checked="true" @endif
                                       @endif 

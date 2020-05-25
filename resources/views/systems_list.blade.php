@@ -12,6 +12,10 @@
                 <i class="fi-pencil"></i>
                 Edit
             </a>
+            <a class="button primary" target="_self" href="{{ asset('delete/'.$system->id) }}">
+                <i class="fi-trash"></i>
+                Delete
+            </a>
         </div>
         <ul class="accordion cell small-12" data-accordion data-allow-all-closed="true" data-multi-expand="true">
             <li class="accordion-item " data-accordion-item>
@@ -42,6 +46,10 @@
                                             <i class="fi-pencil"></i>
                                             Edit
                                         </a>
+				        <a class="button primary" target="_self" href="{{ asset('delete/'.$system->id) }}">
+				            <i class="fi-trash"></i>
+               			            Delete
+				        </a>
                                     </div>
                                     <li class="accordion-item " data-accordion-item>
                                         <a href="#" class="accordion-title">
@@ -69,6 +77,10 @@
                                                             <i class="fi-pencil"></i>
                                                             Edit
                                                         </a>
+            						<a class="button primary" target="_self" href="{{ asset('delete/'.$system->id) }}">
+						            <i class="fi-trash"></i>
+						            Delete
+						        </a>
                                                     </div>
                                                     <div class="media-object cell small-12 callout secondary" data-tagid="{{ $element->tag_id }}">
                                                         <div class="media-object-section">

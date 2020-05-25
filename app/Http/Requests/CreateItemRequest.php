@@ -51,12 +51,16 @@ class CreateItemRequest extends FormRequest
             'tag_id' => [
                 'nullable',
                 'string',
-                'max:32'
+                'max:100'
             ],
             'components' => [
                 'nullable',
                 'array'
             ],
+            'elements' => [
+                'nullable',
+                'array'
+            ]
         ];
     }
 

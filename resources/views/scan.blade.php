@@ -16,7 +16,7 @@
         <i class="fi-pencil"></i>
       </a>
     </div>
-    <div class="card-thumbnail" style="background-image: url('{{ (!empty($system->images->count())) ? asset('storage/'.$system->images->first()['thumbnail_url']) : asset('storage/no-image.png') }}');">
+    <div class="card-thumbnail" style="background-image: url('{{ (!empty($system->images->count())) ? asset('storage/'.$system->images->first()['url']) : asset('storage/no-image.png') }}');">
     </div>
     <div class="card-section">
       <p>{{ $system->description }}</p>

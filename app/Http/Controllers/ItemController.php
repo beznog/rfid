@@ -174,7 +174,7 @@ class ItemController extends Controller
             event(new ScannedItem($request->itemIds));
             return json_encode(["response" => $request->itemIds]);
         }
-        return "No Data: " + $request;
+        return json_encode(["response" => ""]);
     }
 
     public function scanItem($itemId) {

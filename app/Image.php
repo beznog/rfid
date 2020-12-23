@@ -20,8 +20,9 @@ class Image extends Model
 
     	$filePath = Storage::path($file);
 
-    	$thumb = Images::make($filePath)->fit(120)->encode();
-		$store = Storage::put('thumbnails/'.$origFileName, $thumb->__toString());
+    	//$thumb = Images::make($filePath)->fit(120)->encode();
+	$thumb = Images::make($filePath)->resize(120, null, function ($constraint) {$constraint->aspectRatio();})->encode();
+	$store = Storage::put('thumbnails/'.$origFileName, $thumb->__toString());
 
         return self::firstOrCreate(array('url' => 'covers/'.$origFileName, 'thumbnail_url' => 'thumbnails/'.$origFileName));
     }

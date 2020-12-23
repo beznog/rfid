@@ -195,7 +195,7 @@
 <div class="cell small-12 parameter default" data-parameter-name="tag_id">
     {{ Form::text(
             'tag_id', 
-            $value = (isset($item['tagId'])) ? $item['tagId'] : '', 
+            $value = (isset($item['tag_id'])) ? $item['tag_id'] : '', 
             $attributes = array(
                 'placeholder'=>'Tag ID'
             )
